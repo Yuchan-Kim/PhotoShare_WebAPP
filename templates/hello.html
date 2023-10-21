@@ -1,0 +1,38 @@
+<!-- author ben lawson (balawson@bu.edu) -->
+<!doctype html>
+{% if message %}
+  <h4>{{message}}!</h4>
+{% endif %}
+<title>Photoshare</title>
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% endif %}
+
+<h2>Here are public albums</h2>
+<ul>
+  {% for public_album in public_albums %}
+    <a href='/album/public/{{public_album}}'>{{public_album}}</a>
+  {% endfor %}
+</ul>
+
+{% if albums %}
+<h2>Here are your albums</h2>
+<ul>
+  {% for album in albums %}
+    <a href='/album/{{album}}'>{{album}}</a>
+  {% endfor %}
+</ul>
+{% endif %}
+
+
+{% if message is none %}
+  <p>You should <a href='/login'>login!</a></p>
+{% else %}
+  <p> Go to <a href='/profile'>profile?</a></p>
+{% endif %}
+
+<ul>
+<li><a href='/logout'>Logout</a></li>
+<li><a href='/'>Home</a></li>
+<li><a href='/albums'>Add an album</a></li>
+</ul>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% if message %}
+  <h4>{{message}}!</h4>
+{% endif %}
+
+{% if photos %}
+<h2>Here are your uploaded photos</h2>
+    <ul>
+    {% for photo in photos %}
+        <li>{{photo[2]}}<br>
+        <img src='data:image/jpg;base64, {{ base64.b64encode(photo[0]).decode("ascii") }}'/></li>
+        {% if public == false %}
+        <form method="post" enctype="multipart/form-data" action="/delete_photo">
+            <Button name="delete_photo" value = {{photo[1]}} >Delete</Button>
+            <!-- {{photo[1]}} -->
+        </form>
+        {% endif %}
+
+    {% endfor %}
+    </ul>
+{% else %}
+<h2>You do not have photos yet!</h2>
+{% endif %}
+
+{% if public == false %}
+<a href='/album/{{name}}/upload'>Upload</a>
+<a href='/album/delete_album/{{name}}'>Delete Album</a>
+{% endif %}
+<a href='/'>Home</a>
+
